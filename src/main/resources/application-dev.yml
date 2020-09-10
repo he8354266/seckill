@@ -1,0 +1,55 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /project
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/miaosha?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  rabbitmq:
+    host: 47.105.92.214
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+          simple:
+            auto-startup: true
+            default-requeue-rejected: true
+             #消费端
+            concurrency: 5
+            #最大消费端数
+            max-concurrency: 10
+            #自动签收auto  手动 manual
+            acknowledge-mode: manual
+            #限流（海量数据，同时只能过来一条）
+            prefetch: 1
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+
+
+mybatis:
+  type-aliases-package: com.example.project.domain
+  configuration:
+    default-statement-timeout: 300
+    default-fetch-size: 100
+    map-underscore-to-camel-case: true
+
+
+
+
+
